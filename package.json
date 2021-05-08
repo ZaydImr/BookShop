@@ -1,8 +1,8 @@
 {
-  "homepage": "http://zaydimr.github.io/",
   "name": "reactfirebase",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://zaydimr.github.io/BookShop/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
@@ -23,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy":"npm build",
+    "deploy":"gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
