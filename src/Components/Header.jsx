@@ -7,7 +7,7 @@ const Header = () => {
             <div>
                   <div className="header">
                   <div className="header-txt">
-                        <h2>Support Local Bookstores</h2>
+                        <h2>Suupport Local Bookstores</h2>
                         <form className='admin-frm-input'>
                               <input type="text" placeholder='Search'  />
                               <button type='submit'>
