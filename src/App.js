@@ -8,16 +8,14 @@ import Books from './Components/Books';
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/books' component={Books} />
-          <PrivateRoute path='/dashboard' component={Admin} />
+          <Route exact path='/BookShop' component={Home} />
+          <Route path='/BookShop/login' component={Login} />
+          <Route path='/BookShop/books' component={Books} />
+          <PrivateRoute path='/BookShop/dashboard' component={Admin} />
         </Switch>
       </Router>
-    </>
   );
 }
 

@@ -20,15 +20,15 @@ const Navbar = () => {
 },[])
 
   return (
-    <nav className={(top && window.location.href==='http://localhost:3000/')  ? 'nav bluue' : 'nav'} >
+    <nav className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav bluue' : 'nav'} >
       <div className='nav-center'>
         <div className='nav-header'>
           <Link to="/" style={{height: '40px'}}>
-          {(top && window.location.href==='http://localhost:3000/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
+          {(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
           </Link>
           <div>
-          <button className={(top && window.location.href==='http://localhost:3000/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
-          <Link  to='/login'><button className={(top && window.location.href==='http://localhost:3000/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
+          <button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
+          <Link  to='/login'><button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
           </div>
         </div>
         <div className={`links-container ${showLinks && ' show-container'}`}>
