@@ -22,7 +22,7 @@ const secondHeader = ({books}) => {
                                     </article>)
                         })}
             </div>
-            <Link to='/books'><input type='button' value='See more' /></Link>
+            <Link to='/BookShop/books'><input type='button' value='See more' /></Link>
       </form>               
       )
 }

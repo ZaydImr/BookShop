@@ -23,10 +23,10 @@ const Navbar = () => {
     <nav className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav bluue' : 'nav'} >
       <div className='nav-center'>
         <div className='nav-header'>
-          <Link to="/BookShop/" style={{height: '40px'}}>
+          <Link to="/BookShop/" id="aa" >
           {(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
           </Link>
-          <div>
+          <div style={{display:'flex'}}>
           <button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
           <Link  to='/BookShop/login'><button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
           </div>

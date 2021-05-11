@@ -130,6 +130,7 @@ Variables
   --loginLabelBackgroundColor: #01081f;;
   --loginSubmitBackgroundColor: #3d7eff;
   --loginSubmitHoverBackgroundColor: #0b48c3;
+  --loginSubmitColor : var(--clr-white);
   --formFieldMargin: 0.875rem;
 }
 /*
@@ -298,7 +299,12 @@ nav {
 }
 .show-container {
   height: 10rem;
-  box-shadow: var(--light-shadow);
+  box-shadow: 0 15px 13px rgb(0 0 0 / 10%) !important;
+}
+.nav-header #aa{
+  height: 40px;
+  display:flex;
+  align-items: center;
 }
 @media screen and (min-width: 680px) {
   .nav-center {
@@ -1414,6 +1420,18 @@ article h4 {
     min-width: 100% !important;
     margin: 1rem 0;
   }
+  .book-img img {
+    width: 100px !important;
+  }
+  .nav-toggle{
+    display: flex;
+  }
+  .nav-header #aa{
+    padding: 0 0.3rem;
+  }
+  .nav-header #aa .logo{
+    height: 30px;
+  }
   *{
     font-size: 0.9rem;
   }
@@ -1421,10 +1439,10 @@ article h4 {
     padding: 0.5rem;
   }
   .nav *{
-    font-size:  1.4rem;
+    font-size:  1.3rem;
   }
   #botNav,#About,#Contact{
-    height: 54.38px !important;
+    height: 54px !important;
   }
   .footDev{
     display: grid;
