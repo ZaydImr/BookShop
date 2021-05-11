@@ -23,27 +23,27 @@ const Navbar = () => {
     <nav className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav bluue' : 'nav'} >
       <div className='nav-center'>
         <div className='nav-header'>
-          <Link to="/" style={{height: '40px'}}>
+          <Link to="/BookShop/" style={{height: '40px'}}>
           {(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
           </Link>
           <div>
           <button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
-          <Link  to='/login'><button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
+          <Link  to='/BookShop/login'><button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
           </div>
         </div>
         <div className={`links-container ${showLinks && ' show-container'}`}>
           <ul className='links'>
             <li>
-              <Link to='/' onClick={()=>{setShowLinks(!showLinks)}}>Home</Link>
+              <Link to='/BookShop/' onClick={()=>{setShowLinks(!showLinks)}}>Home</Link>
             </li>
             <li>
-              <Link to='books' onClick={()=>{setShowLinks(!showLinks)}}>Books</Link>
+              <Link to='/BookShop/books' onClick={()=>{setShowLinks(!showLinks)}}>Books</Link>
             </li>
             <li>
-              <a href='/#About' onClick={()=>{setShowLinks(!showLinks)}}>About</a>
+              <a href='/BookShop/#About' onClick={()=>{setShowLinks(!showLinks)}}>About</a>
             </li>
             <li>
-              <a href='/#Contact' onClick={()=>{setShowLinks(!showLinks)}}>Contact</a>
+              <a href='/BookShop/#Contact' onClick={()=>{setShowLinks(!showLinks)}}>Contact</a>
             </li>
           </ul>
         </div>

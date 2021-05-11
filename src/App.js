@@ -2,6 +2,7 @@ import React  from 'react'
 import Login from './Components/Login';
 import Home from './Components/Home'
 import Admin from './Components/Admin'
+import Error from './Components/Error'
 import { BrowserRouter as Router , Switch,Route } from 'react-router-dom'
 import PrivateRoute from './Components/PrivateRouter'
 import Books from './Components/Books';
@@ -14,6 +15,7 @@ function App() {
           <Route path='/BookShop/login' component={Login} />
           <Route path='/BookShop/books' component={Books} />
           <PrivateRoute path='/BookShop/dashboard' component={Admin} />
+          <Route path='*' component={Error} />
         </Switch>
       </Router>
   );

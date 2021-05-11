@@ -962,16 +962,16 @@ article h4 {
   height: 0;
 }
 @media screen and (max-width:450px) {
-  .secondHeader .header-books{width: 80%;}
   .header-books .book{
-    width: 300px !important;
-  }
-  .header-books .book .book-img{
-    width: 10% !important;
+    min-width: 100% !important;
+    margin: 1rem 0;
   }
   .book .bookname{
     font-size: 0.9rem;
   }
+}
+.search-form>input{
+  text-transform:  unset;
 }
 .secondHeader{
   padding: 2rem;

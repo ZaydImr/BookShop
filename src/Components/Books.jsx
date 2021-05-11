@@ -7,10 +7,22 @@ import {ImSpinner10} from 'react-icons/im'
 
 const Books = () =>{
       const [load,setLoad] = useState(true);
-      const [books,setBooks] = useState([])
+      const [books,setBooks] = useState([]);
+      const [data,setData] = useState([]);
+      const [search,setSearch] = useState('');
 
       const handleSearch = (e) =>{
             e.preventDefault();
+            Search();
+      }
+      const Search = () =>{
+            if(search !=='') {
+                  const newData = data.filter(person => person.Bookname.toLowerCase().includes(search.toLowerCase()));
+                  setBooks(newData);
+            }
+            else{
+                  setBooks(data);
+            }
       }
 
       useEffect(()=>{
@@ -19,13 +31,14 @@ const Books = () =>{
                   snap.forEach(doc => {
                         books.push({...doc.data(),id: doc.id});
                   });
-                  setBooks(()=>{
+                  setData(()=>{
                         return [...books]
                   });
+                  setBooks(books);
                   setLoad(false);
                   return () => unsub();
             });
-      },[])
+      },[]);
 
       return(
             <>
@@ -33,7 +46,7 @@ const Books = () =>{
                   <div style={{height:'72px'}}></div>
                   <section className='search'>
                         <form className='search-form'>
-                              <input type='text' placeholder='Search' className='form-input'/>
+                              <input autoFocus type='text' placeholder='Search' className='form-input'  value={search} onKeyUp={()=>Search()} onChange={(e)=>setSearch(e.target.value)}/>
                               <button type='submit' className='submit-btn' onClick={(e)=>handleSearch(e)} ><FaSearch/></button>
                         </form>
                   </section>
