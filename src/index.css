@@ -230,7 +230,7 @@ p {
 
 /* section */
 .section {
-  width: 90vw;
+  width: 97vw;
   margin: 0 auto;
   max-width: var(--max-width);
 }
@@ -594,15 +594,14 @@ h2{
   .about p{
     font-size: 1.25rem;
   }
-  .section .person-img{
-    width: 70%;
-    height: 50%;
-  }
   .about .section .prev ,.about .section .next{
     width: 3rem;
     height: 3rem;
     font-size: 1.25rem;
-    top: 25%;
+    top: 28vw;
+  }
+  .section-center{
+    height: 55vw !important;
   }
   .header-books{
     display: unset !important;
@@ -668,7 +667,6 @@ h2{
 .section-center {
   margin: 0 auto;
   margin-top: 4rem;
-  width: 80vw;
   height: 426px;
   max-width: 800px;
   text-align: center;
@@ -961,21 +959,14 @@ article h4 {
   opacity: 0;
   height: 0;
 }
-@media screen and (max-width:450px) {
-  .header-books .book{
-    min-width: 100% !important;
-    margin: 1rem 0;
-  }
-  .book .bookname{
-    font-size: 0.9rem;
-  }
-}
+
 .search-form>input{
   text-transform:  unset;
 }
 .secondHeader{
   padding: 2rem;
   padding-top: 3rem;
+  padding-bottom: 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1410,4 +1401,29 @@ article h4 {
 .header-img{
   display: flex;
   justify-content: center;
+}
+@media screen and (max-width:450px) {
+  .header-books .book{
+    min-width: 100% !important;
+    margin: 1rem 0;
+  }
+  *{
+    font-size: 0.9rem;
+  }
+  .nav-header{
+    padding: 0.5rem;
+  }
+  .nav *{
+    font-size:  1.4rem;
+  }
+  #botNav,#About,#Contact{
+    height: 54.38px !important;
+  }
+  .footDev{
+    display: grid;
+    gap: 0.1rem;
+  }
+  .footDev #devStyle{
+    display: none;
+  }
 }

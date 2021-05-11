@@ -55,7 +55,11 @@ const Footer =({ContactUsEmail,ContactUsLocation,ContactUsPhoneNumber})=>{
                   </div>
                   <div>
                         <div className="footline"></div>
-                        Copyright © 2021 Bookshop | Developed by <a href='https://www.linkedin.com/in/zaydimr/' style={{color:'#00aeef'}}>ZAYD EL IMRANI</a>
+                        <div className="footDev">
+                              <a id='devCopy'>Copyright © 2021 Bookshop</a>
+                              <a id='devStyle'> | </a>
+                              <a id='devAuth'>Developed by <a href='https://www.linkedin.com/in/zaydimr/' style={{color:'#00aeef'}}>ZAYD EL IMRANI</a></a> 
+                        </div>
                   </div>
             </footer>
       )

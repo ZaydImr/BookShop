@@ -50,7 +50,7 @@ const Home = () => {
                   <img src={loadPic} alt='Loading ...'/></div>):(
             <div>
                   <Navbar/>
-                  <div style={{height:'72px'}}/>
+                  <div id='botNav' style={{height:'72px'}}/>
                   <Header/>
                   <SecondHeader books={books}/>
                   <div id='About'/>
