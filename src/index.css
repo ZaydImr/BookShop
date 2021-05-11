@@ -129,7 +129,6 @@ Variables
   --loginInputHoverBackgroundColor: #1d2231;
   --loginLabelBackgroundColor: #01081f;;
   --loginSubmitBackgroundColor: #3d7eff;
-  --loginSubmitColor: #eee;
   --loginSubmitHoverBackgroundColor: #0b48c3;
   --formFieldMargin: 0.875rem;
 }
@@ -299,6 +298,7 @@ nav {
 }
 .show-container {
   height: 10rem;
+  box-shadow: var(--light-shadow);
 }
 @media screen and (min-width: 680px) {
   .nav-center {
@@ -438,8 +438,15 @@ footer{
     border-radius: 0.5rem;
     width: 60%;
     background-color: #00ef55;
-    color: #00ef55;
+    color: var(--clr-black);
     max-width: 200px;
+}
+.btn_sending{
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  width: 60%;
+  background-color: #b3bec2;
+  max-width: 200px;
 }
 .contact_right{
   float: right;

@@ -8,15 +8,24 @@ const Footer =({ContactUsEmail,ContactUsLocation,ContactUsPhoneNumber})=>{
       const email = useRef(null);
       const message = useRef(null);
       const [className,setClassName] = useState('btn_send');
+      const [val,setVal] = useState("Send");
+      const [btnDis,setBtnDis] = useState("");
+
       const handleSend = (e) => {
             e.preventDefault();
-
+            setBtnDis("disabled");
+            setClassName('btn_sending');
+            setVal("Sending...");
             emailjs.sendForm('service_zyp61bj', 'template_s71p0nd', e.target, 'user_DpOCYVDYpgSB0zncoq717')
                   .then((result) => {
-                        setClassName('btn_valid');
-                        setInterval(()=>{
+                        let a = setInterval(()=>{
                               setClassName('btn_send');
+                              setVal("Send");
+                              setBtnDis("");
+                              clearInterval(a);
                         },3000);
+                        setClassName('btn_valid');
+                        setVal("Sent ✔");
                   }, (error) => {
                   console.log(error.text);
                   });
@@ -36,7 +45,7 @@ const Footer =({ContactUsEmail,ContactUsLocation,ContactUsPhoneNumber})=>{
                                           <input  name="name" type="text"  placeholder="Your name" ref={name} required/>
                                           <input name="email" type="email" placeholder="Email" ref={email}  required/>
                                           <textarea name="message" rows="12" placeholder="Message" ref={message}  required></textarea>
-                                          <input type="submit" value="Send" className={className}/>
+                                          <input disabled={btnDis} type="submit" value={val} className={className}/>
                                     </form>
                               </div>
                               <div className="contact_right">
