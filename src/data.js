@@ -46,7 +46,7 @@ export const social = [
   },
   {
     id:4,
-    url:'/BookShop/login',
+    url:'/login',
     icon: <FaSignInAlt/>
   }
 ]

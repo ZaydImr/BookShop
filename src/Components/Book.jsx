@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Book =({ISBN,Bookname,Author,Description,Price,imgUrl})=> {
 
       return (
-            <Link to={`/BookShop/book/${ISBN}`}>
+            <Link to={`/book/${ISBN}`}>
                   <article className='book'>
                         <div className='book-cover'>
                               <div className='book-img'>

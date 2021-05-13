@@ -99,7 +99,7 @@ const BookInfo = () => {
                                     <h3>More books to explore</h3>
                                     {books.map((book)=>{
                                           return (
-                                                <Link to={`/BookShop/book/${book.ISBN}`} key={book.ISBN}>
+                                                <Link to={`/book/${book.ISBN}`} key={book.ISBN}>
                                                       <img src={book.imgUrl} alt={book.Bookname} />
                                                 </Link>
                                           )

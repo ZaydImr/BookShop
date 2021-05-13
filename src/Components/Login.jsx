@@ -99,7 +99,7 @@ const Login = () =>{
                               </div>
                               <div className="form_field" style={{    display: "block",textAlign: "center"}}>
                                     <p className="text--center" style={{float: "left",cursor:"pointer"}} onClick={()=>{setForget(true);setErr('')}}>Forget password ?</p>
-                                    <Link to="/BookShop/" style={{float: 'right',color:'#3d7eff'}}>Go back <RiArrowGoBackFill className="icon"></RiArrowGoBackFill></Link>
+                                    <Link to="/" style={{float: 'right',color:'#3d7eff'}}>Go back <RiArrowGoBackFill className="icon"></RiArrowGoBackFill></Link>
 
                               </div></form>)}
                         </form>

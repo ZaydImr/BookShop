@@ -10,7 +10,7 @@ const Header = () => {
                   <div className="header">
                   <div className="header-txt">
                         <h2>Support Local Bookstores</h2>
-                        <Link to='/BookShop/books'>
+                        <Link to='/books'>
                         <form className='admin-frm-input'>
                               <input type="text" placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)}  />
                               <button type='submit'>

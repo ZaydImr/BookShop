@@ -28,7 +28,7 @@ const Admin = () => {
                   <div className="app-container">
                         <div className='app-left'>
                               <div className="app-logo">
-                                    <Link to='/BookShop/'>
+                                    <Link to='/'>
                                     <img src={Lightlogo} style={{cursor:'pointer'}} alt="logo" width="80"/>
                                     </Link>
                               </div>

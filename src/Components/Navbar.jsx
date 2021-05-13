@@ -20,30 +20,30 @@ const Navbar = () => {
 },[])
 
   return (
-    <nav className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav bluue' : 'nav'} >
+    <nav className={(top && window.location.href==='https://shopbook.netlify.app/')  ? 'nav bluue' : 'nav'} >
       <div className='nav-center'>
         <div className='nav-header'>
-          <Link to="/BookShop/" id="aa" >
-          {(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
+          <Link to="/" id="aa" >
+          {(top && window.location.href==='https://shopbook.netlify.app/')  ? (<img src={logo2} alt='logo' className='logo'/>   ) : (<img src={logo} alt='logo' className='logo'/>   )}
           </Link>
           <div style={{display:'flex'}}>
-          <button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
-          <Link  to='/BookShop/login'><button className={(top && window.location.href==='https://zaydimr.github.io/BookShop/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
+          <button className={(top && window.location.href==='https://shopbook.netlify.app/')  ? 'nav-toggle white' : 'nav-toggle '} onClick={()=>{setShowLinks(!showLinks)}}><FaBars /></button>
+          <Link  to='/login'><button className={(top && window.location.href==='https://shopbook.netlify.app/') ? 'nav-toggle iconLogin white' : 'nav-toggle iconLogin '}  onClick={()=>{setShowLinks(!showLinks)}}><FaSignInAlt/></button></Link>
           </div>
         </div>
         <div className={`links-container ${showLinks && ' show-container'}`}>
           <ul className='links'>
             <li>
-              <Link to='/BookShop/' onClick={()=>{setShowLinks(false)}}>Home</Link>
+              <Link to='/' onClick={()=>{setShowLinks(false)}}>Home</Link>
             </li>
             <li>
-              <Link to='/BookShop/books' onClick={()=>{setShowLinks(false)}}>Books</Link>
+              <Link to='/books' onClick={()=>{setShowLinks(false)}}>Books</Link>
             </li>
             <li>
-              <a href='/BookShop/#About' onClick={()=>{setShowLinks(false)}}>About</a>
+              <a href='/#About' onClick={()=>{setShowLinks(false)}}>About</a>
             </li>
             <li>
-              <a href='/BookShop/#Contact' onClick={()=>{setShowLinks(false)}}>Contact</a>
+              <a href='/#Contact' onClick={()=>{setShowLinks(false)}}>Contact</a>
             </li>
           </ul>
         </div>
