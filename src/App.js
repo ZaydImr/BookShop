@@ -12,11 +12,11 @@ function App() {
   return (
     <Router>
         <Switch>
-          <Route exact path='/BookShop' component={Home} />
-          <Route path='/BookShop/login' component={Login} />
-          <Route path='/BookShop/books' component={Books} />
-          <Route path='/BookShop/book/:ISBN' children={<BookInfo/>}/>
-          <PrivateRoute path='/BookShop/dashboard' component={Admin} />
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/books' component={Books} />
+          <Route path='/book/:ISBN' children={<BookInfo/>}/>
+          <PrivateRoute path='/dashboard' component={Admin} />
           <Route path='*' component={Error} />
         </Switch>
       </Router>
