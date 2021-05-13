@@ -34,16 +34,16 @@ const Navbar = () => {
         <div className={`links-container ${showLinks && ' show-container'}`}>
           <ul className='links'>
             <li>
-              <Link to='/BookShop/' onClick={()=>{setShowLinks(!showLinks)}}>Home</Link>
+              <Link to='/BookShop/' onClick={()=>{setShowLinks(false)}}>Home</Link>
             </li>
             <li>
-              <Link to='/BookShop/books' onClick={()=>{setShowLinks(!showLinks)}}>Books</Link>
+              <Link to='/BookShop/books' onClick={()=>{setShowLinks(false)}}>Books</Link>
             </li>
             <li>
-              <a href='/BookShop/#About' onClick={()=>{setShowLinks(!showLinks)}}>About</a>
+              <a href='/BookShop/#About' onClick={()=>{setShowLinks(false)}}>About</a>
             </li>
             <li>
-              <a href='/BookShop/#Contact' onClick={()=>{setShowLinks(!showLinks)}}>Contact</a>
+              <a href='/BookShop/#Contact' onClick={()=>{setShowLinks(false)}}>Contact</a>
             </li>
           </ul>
         </div>
