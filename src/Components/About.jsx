@@ -1,27 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import {office} from '../data'
+import { firestore } from '../firebase/config';
 
 const About = ({OurStoryDescription}) =>{
       const [index,setIndex] = useState(1);
+      const [office,setOffice] =useState([]);
 
+      const getPics =()=>{
+            const unsub = firestore.collection('imgs').onSnapshot((snap)=>{
+                  let img = [];
+                  snap.forEach(doc => {
+                        img.push(doc.data().imgUrl);
+                  });   
+                  setOffice(img);
+                  return () => unsub();})
+      }
+      
       useEffect(()=>{
             if(index <0)
-            setIndex(office.length-1)
+                  setIndex(office.length-1)
             if(index >= office.length)
-            setIndex(0);
-      },[index])
-      useEffect(()=>{
-      let interval = setInterval(()=>{
-            setIndex(index+1);
-      },3000);
-      return () => clearInterval(interval);
+                  setIndex(0);
       },[index])
 
+      useEffect(()=>{
+            let interval = setInterval(()=>{
+                  setIndex(index+1);
+            },3000);
+            return () => clearInterval(interval);
+      },[index])
+
+      useEffect(()=>{
+            getPics();
+      },[])
       return (
             <div className='about'>
                   <h2>Our story</h2>
-                  <p>{OurStoryDescription} .</p>
+                  <p>{OurStoryDescription}</p>
                   <h2>Our office</h2>                  
                   <section className='section'>
                         <div className='section-center'>
@@ -33,7 +48,7 @@ const About = ({OurStoryDescription}) =>{
                                           position = 'lastSlide';
                                     return (
                                           <article className={position} key={perIndex}>
-                                                <img src={item.url} alt={'Image '+(perIndex+1)} className='person-img'/>
+                                                <img src={item} alt={'Image '+(perIndex+1)} className='person-img'/>
                                           </article>)
                               })}
                               <button className='prev' onClick={() =>setIndex(index-1)}><FaChevronLeft/></button>

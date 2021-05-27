@@ -1,9 +1,4 @@
 import React from 'react';
-import pic1 from './assets/office1.jpg';
-import pic2 from './assets/office2.jpg';
-import pic3 from './assets/office3.jpg';
-import pic4 from './assets/office4.jpg';
-import pic5 from './assets/office5.jpg';
 import {  FaFacebook, FaLinkedin, FaTwitter,FaSignInAlt } from 'react-icons/fa'
 export const links = [
   {
@@ -48,23 +43,5 @@ export const social = [
     id:4,
     url:'/login',
     icon: <FaSignInAlt/>
-  }
-]
-
-export const office =[
-  {
-    url : pic1,
-  },
-  {
-    url : pic2,
-  },
-  {
-    url : pic3,
-  },
-  {
-    url : pic4,
-  },
-  {
-    url : pic5,
   }
 ]

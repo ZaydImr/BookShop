@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {FaUserAlt,FaLock,FaEnvelope} from 'react-icons/fa';
 import {RiArrowGoBackFill} from 'react-icons/ri'
-import fire  from '../firebase/config';
+import fire, { firestore }  from '../firebase/config';
 import Admin from './Admin'
 
 const Login = () =>{
@@ -20,12 +20,23 @@ const Login = () =>{
             fire
                   .auth()
                   .signInWithEmailAndPassword(email,pass)
-                  .catch((err)=>{
-                        setErr(err.message);
-                  })
+                  .then((userCredential) => {
+                        var user = userCredential.user;
+                        if(!user.emailVerified){
+                              user.sendEmailVerification();
+                              setErr('You have to verifie your email first , check your inbox !');
+                              fire.auth().signOut();
+                        }
+                        else{
+                              setEmail('');
+                              setPass('');
+                        }
+                  }).catch((err)=>{setErr(err.message)})
+                  
       }
 
-      const handleForget = ()=>{
+      const handleForget = (e)=>{
+            e.preventDefault();
             setErr('');
             setVal('');
             fire
@@ -40,15 +51,16 @@ const Login = () =>{
       useEffect(() =>{
             fire.auth().onAuthStateChanged((user)=>{
                   if(user){
-                        setEmail('');
-                        setPass('');
                         setUser(user);
-                        
+                        firestore.collection('Users').where('uid','==',user.uid).where('emailVerified','==',false).get().then((querySnapshot) => {
+                              querySnapshot.docs.map((doc)=>{
+                                    doc.ref.update({emailVerified:true});
+                              });
+                        })
                   }
                   else{
                         setUser('');
                   }
-                  
             });
       },[]);
 
@@ -75,12 +87,13 @@ const Login = () =>{
                               </div>
                               
                               <div className="form_field">
-                                    <input onClick={handleForget} className="login_btn login_field" type="button" value="Send mail" style={{fontFamily: 'Whitney bold',fontStyle: 'italic'}}/>
+                                    <input onClick={handleForget} className="login_btn login_field" type="submit" value="Send mail" style={{fontFamily: 'Whitney bold',fontStyle: 'italic'}}/>
                               </div>
                               <div className='form_field'>
                                     <h4 style={{cursor:"pointer",margin:'auto'}} onClick={()=>{setForget(false);setVal('');setErr('')}}>Login</h4>
                               </div>
-                        </React.Fragment>) : (<form><div className="form_field">
+                        </React.Fragment>) : (<>
+                        <div className="form_field">
                               <label htmlFor="user"><FaUserAlt className="icon"></FaUserAlt></label>
                               <input id="user" value={email} onChange={(e)=>{setEmail(e.target.value)}} type="email" className="login_field login_input" placeholder="Email" required/>
                               </div>
@@ -101,7 +114,7 @@ const Login = () =>{
                                     <p className="text--center" style={{float: "left",cursor:"pointer"}} onClick={()=>{setForget(true);setErr('')}}>Forget password ?</p>
                                     <Link to="/" style={{float: 'right',color:'#3d7eff'}}>Go back <RiArrowGoBackFill className="icon"></RiArrowGoBackFill></Link>
 
-                              </div></form>)}
+                              </div></>)}
                         </form>
                   </div>
             </div>)}

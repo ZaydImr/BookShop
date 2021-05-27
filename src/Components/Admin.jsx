@@ -36,40 +36,43 @@ const Admin = () => {
                                     <li className={active==='dashboard' ? 'nav-list-item active' : 'nav-list-item'}>
                                           <p className='nav-list-link' onClick={()=>setActive('dashboard')}>
                                                 <FaTachometerAlt/>
-                                                <p>Dashboard</p>
+                                                <a>Dashboard</a>
                                           </p>
                                     </li>
                                     <li className={active==='Books' ? 'nav-list-item active' : 'nav-list-item'}>
                                           <p  className='nav-list-link' onClick={()=>setActive('Books')}>
                                                 <FaBook/>
-                                                <p>Books</p>
+                                                <a>Books</a>
                                           </p>
                                     </li>
                                     <li className={active==='interface' ? 'nav-list-item active' : 'nav-list-item'}>
                                           <p className='nav-list-link' onClick={()=>setActive('interface')}>
-                                                      <FaHome/>
-                                                      <p>Home interface</p>
+                                                <FaHome/>
+                                                <a>Home interface</a>
                                           </p>
                                     </li>
                                     <li className={active==='Team' ? 'nav-list-item active' : 'nav-list-item'}>
                                           <p className='nav-list-link' onClick={()=>setActive('Team')}>
                                                 <FaUserFriends/>
-                                                <p>Team</p>
+                                                <a>Team</a>
                                           </p>
                                     </li>
                                     <li className='nav-list-item'>
-                                          <p className='nav-list-link' style={{color:'#fff'}} onClick={handleLogout}>
+                                          <p className='nav-list-link' style={{color:'#fff',margin:0}} onClick={handleLogout}>
                                                 <FaSignOutAlt style={{marginLeft:'2px',marginRight:'10px'}}/>
-                                                <p>Logout</p>
+                                                <a>Logout</a>
                                           </p>
                                     </li>
                               </ul>
                         </div>
                         <div className='app-main'>
-                        <div className="main-header-line">
-                              <h1>{active}</h1>
-                        </div>
-                              {main()}
+                              <div className="main-header-line">
+                                    <h1>{active}</h1>
+                              </div >
+                              <div className='main-content'>
+                                    {main()}
+                              </div>
+                                    
                         </div>
                         
                   </div>

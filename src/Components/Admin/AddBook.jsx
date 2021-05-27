@@ -1,13 +1,11 @@
 import React, {useState} from 'react'
-import Progress from './Progress';
-import {firestore} from '../../firebase/config'
+import {firestore,storage} from '../../firebase/config'
 import { FaMoneyBillWave,FaFileSignature,FaSortAmountUpAlt,FaFeatherAlt,FaBarcode, FaFileUpload,FaLayerGroup } from 'react-icons/fa'
 import {ImSpinner10} from 'react-icons/im'
 
 const AddBook = ({setAdd}) => {
       const types = ['image/png','image/jpeg'];
       const [file,setFile] =  useState(null);
-      const [url,setUrl]= useState('');
       const [addClick,setAddClick] = useState(true);
       const [err,setErr] = useState('');
       const [data,setData] = useState({
@@ -20,45 +18,85 @@ const AddBook = ({setAdd}) => {
             Description:'',
             imgUrl:''
       })
+      const validISBN= new RegExp('^[0-9]+.{5,}$');
+      const validAuthor = new RegExp('^(([a-zA-Z]{2,15}){1}(\\s([a-zA-Z]{2,15}))+)$');
+      const validCategory = new RegExp('^[A-Za-z]+$');
+      const validQte = new RegExp('^[0-9]+$');
+      const validPrice = new RegExp('^(\\d{1,5})$|^(\\d{1,5},\\d{1,2})$|^(\\d{1,2}\\.\\d{1,})$|^(\\d{1,2}\\.\\d{3,3},\\d{1,2})$');
+
+      
+
 
       const handleAdd = (e)=>{
             setErr('');
             e.preventDefault();
-            var {ISBN,Bookname,Author,Category,Qte,Price,Description,imgUrl} = data;
+            
+            if (!validISBN.test(data.ISBN)) {
+                  setErr('ISBN incorrect !');
+                  return;
+            }
+            if (!validAuthor.test(data.Author)) {
+                  setErr('Author name incorrect !');
+                  return;
+            }
+            
+            if (!validCategory.test(data.Category)) {
+                  setErr('Category incorrect !');
+                  return;
+            }
+            if (!validQte.test(data.Qte)) {
+                  setErr('Qte incorrect !');
+                  return;
+            }
+            if (!validPrice.test(data.Price)) {
+                  setErr('Price format incorrect !');
+                  return;
+            }
 
-            if(ISBN && Bookname && Author && Category && Qte && Price && Description){
+            var {ISBN,Bookname,Author,Category,Qte,Price,Description} = data;
+
+            if(ISBN && Bookname && Author && Category && Qte && Price && Description && file){
                   setAddClick(false);
-                  var interval = setTimeout(()=>{
-                              firestore.collection("Book").add(data).then(e.target.reset()).catch((err)=>setErr(err));
-                              setAddClick(true);
-                        },3000);
-                  return () => clearTimeout(interval);
+                  var storageRef = storage.ref('Books/'+(Math.random()*10)+file.name);
+                  let up = storageRef.put(file);
+                  up.on('state_changed',() => {},() => {}, 
+                  () => {
+                        up.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                              data.imgUrl= downloadURL;
+                              firestore.collection("Book").add(data).then(()=>{e.target.reset();setAddClick(true);}).catch((err)=>setErr(err));
+                  });});
                   }
             else{
-                  setFile(null);
-                  setErr('Please Fill Blanks')
+                  setErr('Please Fill Blanks');
             };
       }
 
       const handleFile = (e) =>{
             let selected = e.target.files[0];
-
-            if(selected && types.includes(selected.type)){
-                  setFile(selected);
-                  setErr('');
-            }else{
-                  setFile(null);
-                  setErr('Please select an image file (png or jpeg)')
-            }
+            setFile(selected);
       }
+
+      const handleReset =()=>{
+            setErr('');
+            setData({
+                  ISBN: '',
+                  Bookname : '',
+                  Author: '',
+                  Category:'',
+                  Qte:'',
+                  Price: '',
+                  Description:'',
+                  imgUrl:''
+            })
+      }
+      
       return (
-            <form className='admin-book-add' onSubmit={handleAdd}>
-                        {file && <Progress file={file} setFile={setFile} setUrl={setUrl} data={data} setData={setData}/>}
+            <form id='frm-add-book' className='admin-book-add' onSubmit={handleAdd}>
                         <h4 style={{fontSize:'1.25rem',margin: '1.5rem'}}>Add book</h4>
                         <div className='admin-frm-cont'>
                               <div className='admin-frm-input'>
                                     <FaBarcode/>
-                                    <input type="text" placeholder='Enter ISBN' value={data.ISBN} onChange={(e)=>setData({...data, ISBN:e.target.value})}/>
+                                    <input autoFocus type="text" placeholder='Enter ISBN' value={data.ISBN} onChange={(e)=>setData({...data, ISBN:e.target.value})}/>
                               </div>
                               <div className='admin-frm-input'>
                                     <FaFileSignature/>
@@ -95,7 +133,7 @@ const AddBook = ({setAdd}) => {
                         <div className='admin-frm-btn'>
                               {err && (<><span style={{display:'inline-block',color:'red',fontSize:14,margin:5}}>{err}</span><br/></>)}
                               {addClick?(<><input type="submit" value="Add"/>
-                              <input type="reset" value="Reset" onClick={(e)=>{setErr('')}}  />
+                              <input type="reset" value="Reset" onClick={handleReset}  />
                               <input type="button" value="Cancel" onClick={()=>setAdd(false)}/></>):(
                                     <><ImSpinner10 className='rotate'/></>
                               )}

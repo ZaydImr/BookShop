@@ -21,7 +21,7 @@ const Header = () => {
                         </Link>
                   </div>
                   <div className="header-img">
-                        <img src={back}/>
+                        <img src={back} alt='back'/>
                   </div>
             </div>
             </div>

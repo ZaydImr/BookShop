@@ -11,13 +11,13 @@ const Home = () => {
       const [load,setLoad] = useState(true);
       const [info,setInfo] = useState({
             ContactUsEmail:'',
-            ContactUsLocation:'',
             ContactUsPhoneNumber:'',
             OurStoryDescription:''
       });
       const [books, setBooks] = useState([])
 
       useEffect(()=>{
+            console.log(window.location);
                   let i =1;
                   const unsub = firestore.collection('Book').onSnapshot((snap)=>{
                   let books = [];
@@ -36,12 +36,22 @@ const Home = () => {
             setLoad(true);
             try{
                   const unsub = firestore.collection('Home').onSnapshot((snap)=>{
-                  let info = [];
+                  let info = {
+                        ContactUsEmail:'',
+                        ContactUsPhoneNumber:'',
+                        OurStoryDescription:''
+                  };
                   snap.forEach(doc => {
-                        info.push({...doc.data(),id: doc.id});
+                        info.ContactUsEmail = doc.data().ContactUsEmail;
+                        info.ContactUsPhoneNumber = doc.data().ContactUsPhoneNumber;
+                        info.OurStoryDescription = doc.data().OurStoryDescription;
                   });
                   setInfo(info)
                   setLoad(false);
+                  if(window.location.hash === '#Contact')
+                        document.getElementById('Contact').scrollIntoView();
+                  else if(window.location.hash === '#About')
+                        document.getElementById('About').scrollIntoView();
                   return () => unsub();
                   })}catch(err){setLoad(true)}
       },[]);
@@ -54,15 +64,10 @@ const Home = () => {
                   <Header/>
                   <SecondHeader books={books}/>
                   <div id='About'/>
-                  {info.map((item,index)=>{
-                        const {ContactUsEmail,ContactUsLocation,ContactUsPhoneNumber,OurStoryDescription} = item;
-                  return(
-                        <React.Fragment key={index}>
-                              <About OurStoryDescription={OurStoryDescription}/>
-                              <div id='Contact'/>
-                              <Footer ContactUsEmail={ContactUsEmail} ContactUsLocation={ContactUsLocation} ContactUsPhoneNumber={ContactUsPhoneNumber}/>
-                        </React.Fragment>)
-                  })}
+                  <About OurStoryDescription={info.OurStoryDescription}/>
+                  <div id='Contact'/>
+                  <Footer ContactUsEmail={info.ContactUsEmail} ContactUsPhoneNumber={info.ContactUsPhoneNumber}/>
+
             </div>)}</>
       )
 }

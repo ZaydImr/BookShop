@@ -3,7 +3,6 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import {Link, useParams} from 'react-router-dom'
 import {firestore} from '../firebase/config'
-import Book from './Book'
 
 const BookInfo = () => {
       const {ISBN} = useParams();
@@ -12,20 +11,18 @@ const BookInfo = () => {
       const [load,setLoad] = useState(true);
       const [info,setInfo] = useState({
             ContactUsEmail:'',
-            ContactUsLocation:'',
             ContactUsPhoneNumber:'',
       });
 
       useEffect(()=>{
             const unsub = firestore.collection('Book').onSnapshot((snap)=>{
                   let books = [];
-                  let i = 1;
-                  let j=5
+                  let i = 0;
+                  let j=5 ;
                   for (const book of snap.docs) {
                         i++;
                         if(book.data().ISBN === ISBN){
                               j++;
-                              console.log('test');
                         }
                         else if(i<=j){
                               books.push({...book.data()});
@@ -46,7 +43,7 @@ const BookInfo = () => {
                   };
                   return () => unsubs();
             });
-      },[])
+      },[ISBN])
 
       useEffect(() =>{
             setLoad(true);
@@ -86,7 +83,7 @@ const BookInfo = () => {
                                                       <div className="line"></div>
                                                       <div className='price'>
                                                             <p>{Qte} available in stock</p>
-                                                            <span className='price2'>{Price}$</span>
+                                                            <span className='price2'>{parseFloat(Price).toFixed(2)}$</span>
                                                       </div>      
                                                       <h3>Description</h3>
                                                       <p>{Description}</p>
@@ -106,7 +103,6 @@ const BookInfo = () => {
                                     })}
                               </div>
                         </div>
-                        <div id='botNav' style={{height:72}}></div>
                         <Footer ContactUsEmail={info.ContactUsEmail} ContactUsLocation={info.ContactUsLocation} ContactUsPhoneNumber={info.ContactUsPhoneNumber}/>
                         </>)}
                   </>
