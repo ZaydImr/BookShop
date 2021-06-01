@@ -1676,6 +1676,7 @@ article h4 {
   color: var(--clr-white);
   border-radius: .5rem;
   width: 100%;
+  max-width: 800px;
   margin: auto;
   position: relative;
 }
@@ -1693,7 +1694,6 @@ article h4 {
 }
 .home-interface textarea{
   width: 100%;
-  max-width: 600px;
   height: 100px;
   border-radius: .5rem;
   padding: .5rem;
@@ -1711,7 +1711,6 @@ article h4 {
   justify-content: space-between;
   gap: 1.5rem;
   width: 100%;
-  max-width: 600px;
   margin: auto;
   margin-bottom: 2rem;
 }

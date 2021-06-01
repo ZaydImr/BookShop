@@ -6,7 +6,6 @@ const Error = () => {
       const history = useHistory();
       useEffect(()=>{
             var interval = setTimeout(()=>{
-                  
                   history.push('/');
             },1000);
             return () => clearTimeout(interval);

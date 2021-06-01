@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
+import 'firebase/analytics'
 
 
 var firebaseConfig = {
@@ -17,6 +18,15 @@ var firebaseConfig = {
 const fire = firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 const storage = firebase.storage();
+
+const analytics = firebase.analytics();
+//console.log(analytics);
+analytics.logEvent('select_content', {
+      content_type: 'image',
+      content_id: 'P12453',
+      items: [{ name: 'Kittens' }]
+});
+
 
 export {storage};
 export  {firestore} ;

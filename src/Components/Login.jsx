@@ -17,22 +17,25 @@ const Login = () =>{
       const handleLogin = (e) =>{
             e.preventDefault();
             setErr('');
-            fire
-                  .auth()
-                  .signInWithEmailAndPassword(email,pass)
-                  .then((userCredential) => {
-                        var user = userCredential.user;
-                        if(!user.emailVerified){
-                              user.sendEmailVerification();
-                              setErr('You have to verifie your email first , check your inbox !');
-                              fire.auth().signOut();
-                        }
-                        else{
-                              setEmail('');
-                              setPass('');
-                        }
-                  }).catch((err)=>{setErr(err.message)})
-                  
+                  fire.auth().setPersistence('session')
+                  .then(() => {
+                        fire
+                        .auth()
+                        .signInWithEmailAndPassword(email,pass)
+                        .then((userCredential) => {
+                              var user = userCredential.user;
+                              if(!user.emailVerified){
+                                    user.sendEmailVerification();
+                                    setErr('You have to verifie your email first , check your inbox !');
+                                    fire.auth().signOut();
+                              }
+                              else{
+                                    setEmail('');
+                                    setPass('');
+                              }
+                        }).catch((err)=>{setErr(err.message)})
+                  })
+                  .catch((err)=>{setErr(err.message)});
       }
 
       const handleForget = (e)=>{
