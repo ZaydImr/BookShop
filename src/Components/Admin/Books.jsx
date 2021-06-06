@@ -22,11 +22,7 @@ const Books = () => {
                   return () => unsub();
             });
       },[])
-
-      const handleSearch = (e) =>{
-            e.preventDefault();
-            Search();
-      }
+      
       const Search = () =>{
             if(search !=='') {
                   const newData = booksBac.filter(person => person.Bookname.toLowerCase().includes(search.toLowerCase()));

@@ -17,7 +17,6 @@ const Home = () => {
       const [books, setBooks] = useState([])
 
       useEffect(()=>{
-            console.log(window.location);
                   let i =1;
                   const unsub = firestore.collection('Book').onSnapshot((snap)=>{
                   let books = [];
@@ -55,7 +54,8 @@ const Home = () => {
                   return () => unsub();
                   })}catch(err){setLoad(true)}
       },[]);
-      return(<>{load?(
+      return(<>
+            {load?(
             <div className='home-loading'>
                   <img src={loadPic} alt='Loading ...'/></div>):(
             <div>

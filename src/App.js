@@ -1,4 +1,4 @@
-import React  from 'react'
+import React,{useEffect}  from 'react'
 import Login from './Components/Login';
 import Home from './Components/Home'
 import Admin from './Components/Admin'
@@ -7,8 +7,23 @@ import { BrowserRouter as Router , Switch,Route } from 'react-router-dom'
 import PrivateRoute from './Components/PrivateRouter'
 import Books from './Components/Books';
 import BookInfo from './Components/BookInfo';
+import { firestore } from './firebase/config';
 
 function App() {
+  useEffect(() => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '_' + dd + '_' + yyyy;
+    firestore.collection('Visitors').doc(today).get().then((doc)=> {
+      firestore.collection('Visitors').doc(today).update({
+        counter:++doc.data().counter
+      })
+    }).catch(()=>{
+      firestore.collection('Visitors').doc(today).set({counter:1})
+    })
+  }, [])
   return (
     <Router>
         <Switch>
