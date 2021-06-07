@@ -39,7 +39,7 @@ const Home = () => {
             let selected = e.target.files[0];
             var storageRef = storage.ref((Math.random()*10)+selected.name);
             let up = storageRef.put(selected);
-            up.on('state_changed',(snapshot) => {},(error) => {}, 
+            up.on('state_changed',() => {},() => {}, 
             () => {
                   up.snapshot.ref.getDownloadURL().then((downloadURL) => {
                         firestore.collection('imgs').add({imgUrl:downloadURL});

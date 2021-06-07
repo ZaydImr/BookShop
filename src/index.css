@@ -1127,9 +1127,10 @@ article h4 {
     background: radial-gradient(circle, #051340 1%, #040f32 100%);
 }
 .dashboard_infos{
+  margin: auto;
+  max-width: 1216px;
   display: flex;
   justify-content: space-between;
-  margin: 0 -8px;
 }
 .dashboard_infos .chart-container-wrapper {
   width: 33.3%;
@@ -1806,4 +1807,25 @@ article h4 {
   margin: 5px;
   border-radius: 5px;
   border: 1px solid var(--bodyBackgroundColor);
+}
+.chart{
+  background-color: #01081f;
+  padding: 1rem;
+  color: white;
+  max-width: 1200px;
+    margin: 1rem auto;
+    border-radius: 1rem;
+}
+.chart span{
+  color: var(--baseColor);
+
+}
+.chart>div{
+  display: flex;
+  justify-content: space-between;
+}
+.chart h2{
+  margin: 0;
+  font-size: 16px;
+  line-height: 16px;
 }
