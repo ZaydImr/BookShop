@@ -3,8 +3,10 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import {Link, useParams} from 'react-router-dom'
 import {firestore} from '../firebase/config'
+import {RiArrowGoBackFill} from 'react-icons/ri'
 
 const BookInfo = () => {
+      const [isnt,setIsnt] = useState(true);
       const {ISBN} = useParams();
       const [book, setBook] = useState([]);
       const [books, setBooks] = useState([]);
@@ -31,6 +33,7 @@ const BookInfo = () => {
                               break;
                   };
                   setBooks(books);
+                  
                   return () => unsub();
             });
             const unsubs = firestore.collection('Book').onSnapshot((snap)=>{
@@ -39,10 +42,13 @@ const BookInfo = () => {
                               let bo = [];
                               bo.push({...book.data()});
                               setBook(bo);
+                              setIsnt(false)
                         }
+                        
                   };
                   return () => unsubs();
             });
+            
       },[ISBN])
 
       useEffect(() =>{
@@ -63,7 +69,8 @@ const BookInfo = () => {
                         <div id='botNav' style={{height:72}}></div>
                         {load ? (<h2>Loading...</h2>):(<>
                         <div className='external-book'>
-                              {book.map((item)=>{
+                              {isnt?(<div style={{justifyContent:'center',display:'flex',gap:5}}><p style={{marginBottom:0}}>This book doesn't exist !! </p><Link to='/' style={{color:'red',display:'flex',alignItems:'center',gap:2}}> Go Home<RiArrowGoBackFill/></Link> </div>):(
+                              book.map((item)=>{
                                     const {Author,Bookname,Category,Description,Price,Qte,imgUrl} = item;
                                     return (
                                           <div className='book' key={ISBN}>
@@ -90,7 +97,7 @@ const BookInfo = () => {
                                                 </div>      
                                           </div>      
                                     )
-                              })}
+                              }))}
                               <div className='line'></div>
                               <div className='may-know'>
                                     <h3>More books to explore</h3>

@@ -1689,6 +1689,7 @@ article h4 {
     display: flex;
     left: 0;
     z-index: 1;
+    cursor: not-allowed;
 }
 .home-interface h4{
   margin: .75rem 0;
