@@ -1,6 +1,8 @@
 I madeed this project with ReactJS, JavaScript, CSS, Firebase, Git.
 
-LINK : https://shopbook.netlify.app/
+Website url : https://shopbook.netlify.app/
 
-email and password for testing the user interface : 
+Admin panel url : https://shopbook.netlify.app/login
+
+```
 vanim74720@fxseller.com : 123456
