@@ -1,5 +1,5 @@
 import React from 'react'
-import fire from '../firebase/config'
+import fire, { firestore } from '../firebase/config'
 import Lightlogo from '../Shape_1.svg'
 import {FaHome,FaUserFriends,FaBook,FaTachometerAlt,FaSignOutAlt} from 'react-icons/fa'
 import Dashboard from './Admin/Dashboard'
@@ -12,7 +12,15 @@ const Admin = () => {
       const [active,setActive] = React.useState('dashboard');
 
       const handleLogout = () =>{
-            fire.auth().signOut();
+            firestore.collection("Users").where("uid","==",fire.auth().currentUser.uid).get().then((snap)=>{
+                  snap.forEach(doc => {
+                        doc.ref.update({
+                              status : 'offline'
+                        }).then(()=>{
+                              fire.auth().signOut();
+                        })
+                  });
+            })
       }
 
       const main = () =>{
@@ -23,6 +31,46 @@ const Admin = () => {
                   default :return(<Dashboard/>);
             }
       }
+
+      document.onvisibilitychange =  (e) => {
+                  if(document.visibilityState === 'hidden')
+                  {
+                        firestore.collection('Users').where('uid','==',fire.auth().currentUser.uid).get().then(snap=>{
+                              snap.forEach(doc => {
+                                    doc.ref.update({ status : 'away' })
+                              });
+                        })
+                  }
+                  else{
+                        firestore.collection('Users').where('uid','==',fire.auth().currentUser.uid).get().then(snap=>{
+                              snap.forEach(doc => {
+                                    doc.ref.update({ status : 'online' })
+                              });
+                        })
+                  }
+      }
+
+      /*window.onbeforeunload = () => {
+            firestore.collection('Users').where('uid','==',fire.auth().currentUser.uid).get().then(snap=>{
+              snap.forEach(doc => {
+                    doc.ref.update({ status : 'offline' }).then(()=>{
+                          return true
+                    })
+              });
+           })
+      }*/
+
+      /*window.addEventListener("beforeunload", async () => {        
+            await firestore.collection('Users').where('uid','==',fire.auth().currentUser.uid).get().then(snap=>{
+                  snap.forEach(doc => {
+                        doc.ref.update({ status : 'offline' }).then(()=>{
+                        })
+                  });
+               })
+               alert('alee')
+            return;
+          });*/
+
       return(
             <div className='admin-container'>
                   <div className="app-container">
@@ -57,8 +105,8 @@ const Admin = () => {
                                                 <a>Team</a>
                                           </p>
                                     </li>
-                                    <li className='nav-list-item'>
-                                          <p className='nav-list-link' style={{color:'#fff',margin:0}} onClick={handleLogout}>
+                                    <li className='nav-list-item'onClick={handleLogout}>
+                                          <p className='nav-list-link' style={{color:'#fff',margin:0}} >
                                                 <FaSignOutAlt style={{marginLeft:'2px',marginRight:'10px'}}/>
                                                 <a>Logout</a>
                                           </p>

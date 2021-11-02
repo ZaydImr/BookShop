@@ -14,7 +14,7 @@ const Book =({ISBN,Bookname,Author,Description,Price,imgUrl})=> {
                         <div className='book-info'>
                               <h4 className='bookname'>{Bookname}</h4>
                               <h4 className='author'>{Author}</h4>
-                              <p>{Description}</p>
+                              <p>{Description.length > 110 ? Description.substring(0,110) + '...'  : Description}</p>
                               <h4 className='price'>{parseFloat(Price).toFixed(2)}$</h4>
                         </div>
                   </article>

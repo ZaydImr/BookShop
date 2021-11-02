@@ -32,6 +32,13 @@ const Login = () =>{
                               else{
                                     setEmail('');
                                     setPass('');
+                                    firestore.collection("Users").where("uid","==",user.uid).get().then((snap)=>{
+                                          snap.forEach(doc => {
+                                                doc.ref.update({
+                                                      status : 'online'
+                                                })
+                                          });
+                                    })
                               }
                         }).catch((err)=>{setErr(err.message)})
                   })

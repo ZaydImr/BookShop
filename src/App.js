@@ -7,9 +7,16 @@ import { BrowserRouter as Router , Switch,Route } from 'react-router-dom'
 import PrivateRoute from './Components/PrivateRouter'
 import Books from './Components/Books';
 import BookInfo from './Components/BookInfo';
-import { firestore } from './firebase/config';
+import fire, { firestore } from './firebase/config';
+import Messages from './Components/Messages'
+import { useState } from 'react';
+
+
 
 function App() {
+
+  const [userConnected,setUserConnected] = useState(false)
+
   useEffect(() => {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -24,8 +31,14 @@ function App() {
       firestore.collection('Visitors').doc(today).set({counter:1})
     })
   }, [])
+
+  fire.auth().onAuthStateChanged(user=>{
+    setUserConnected(user)
+  })
+
   return (
-    <Router>
+      <Router>
+        {!userConnected && <Messages />}
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
